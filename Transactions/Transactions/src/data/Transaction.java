@@ -46,4 +46,14 @@ public class Transaction {
     public String getDateTransaction() {
         return dateTransaction;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "textTransaction='" + textTransaction + '\'' +
+                ", typeTransaction=" + typeTransaction +
+                ", valueTransaction=" + valueTransaction +
+                ", dateTransaction='" + dateTransaction + '\'' +
+                '}';
+    }
 }

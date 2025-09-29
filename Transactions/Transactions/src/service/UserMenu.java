@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class UserMenu {
     static final String REGEX;
+    private final FinancialAccounting financialAccounting;
 
     static {
         REGEX = "^([А-Яа-я\\s]+)\\;\\s([\\d+\\.]+)\\;\\s(INCOME|EXPENSE);" +
@@ -22,6 +23,7 @@ public class UserMenu {
 
     public UserMenu() {
         reader = new BufferedReader(new InputStreamReader(System.in));
+        financialAccounting = new FinancialAccounting();
     }
 
     public void startProgram() throws IOException {
@@ -30,7 +32,7 @@ public class UserMenu {
         do {
             input = reader.readLine();
             choiceUser(input);
-        } while (input.equals(EnumsChoice.EXIT.toString()));
+        } while (!input.equalsIgnoreCase(EnumsChoice.EXIT.toString()));
     }
 
     private void showMenu() {
@@ -56,18 +58,15 @@ public class UserMenu {
             EnumsChoice enumChoice = convertToEnum(choice);
             switch (enumChoice) {
                 case HELP -> System.out.println("help");
-                case REPORT -> System.out.println("report");
+                case REPORT -> financialAccounting.printTransactions();
                 case EXIT -> System.out.println("Программа завершена");
                 default -> System.out.println("Неверная команда");
             }
         } catch (IllegalArgumentException ex) {
-            String transaction = choice;
-            if (isTrueFormat(transaction)) {
-                Transaction financialAccounting = new Transaction(transaction);
-                String calculateFinancial = calculateTransaction(transaction);
-                System.out.println(calculateFinancial);
-            } else {
-                System.out.println("Неверный формат транзакции");
+            String input = choice;
+            if (isTrueFormat(input)) {
+               Transaction transaction = new Transaction(input);
+               financialAccounting.addTransaction(transaction);
             }
         }
 
