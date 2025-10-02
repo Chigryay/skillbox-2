@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class UserMenu {
     static final String REGEX;
+    private final ReportTransactions reportTransactions;
     private final FinancialAccounting financialAccounting;
 
     static {
@@ -24,6 +25,7 @@ public class UserMenu {
     public UserMenu() {
         reader = new BufferedReader(new InputStreamReader(System.in));
         financialAccounting = new FinancialAccounting();
+        reportTransactions = new ReportTransactions(financialAccounting);
     }
 
     public void startProgram() throws IOException {
@@ -58,7 +60,7 @@ public class UserMenu {
             EnumsChoice enumChoice = convertToEnum(choice);
             switch (enumChoice) {
                 case HELP -> System.out.println("help");
-                case REPORT -> financialAccounting.printTransactions();
+                case REPORT -> reportTransactions.printReport();
                 case EXIT -> System.out.println("Программа завершена");
                 default -> System.out.println("Неверная команда");
             }

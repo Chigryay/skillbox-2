@@ -56,4 +56,8 @@ public class Transaction {
                 ", dateTransaction='" + dateTransaction + '\'' +
                 '}';
     }
+
+    private boolean isIncomeTransaction(TypeTransaction typeTransaction) {
+        return typeTransaction == TypeTransaction.INCOME;
+    }
 }

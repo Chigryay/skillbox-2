@@ -1,19 +1,18 @@
-package com.alex_chiga.race.data;
+package com.alex_chiga.race.data.abstractModels;
 
 import com.alex_chiga.race.interfaces.Acceleration;
 import com.alex_chiga.race.interfaces.Breakable;
 import com.alex_chiga.race.util.CalcRandom;
 
 public abstract class Vehicle implements Acceleration, Breakable {
-    protected static int totalDistance = 0;
     protected final String model;
     protected int speed;
     int cordX;
 
-    public Vehicle(String model, int cordX, int speed) {
+    protected Vehicle(String model, int speed) {
         this.model = model;
-        this.cordX = cordX;
         this.speed = speed;
+        cordX = 0;
     }
 
     public void speed(int speed) {
