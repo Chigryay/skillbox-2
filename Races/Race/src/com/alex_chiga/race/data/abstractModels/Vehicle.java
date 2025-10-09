@@ -7,7 +7,7 @@ import com.alex_chiga.race.util.CalcRandom;
 public abstract class Vehicle implements Acceleration, Breakable {
     protected final String model;
     protected int speed;
-    int cordX;
+    protected int cordX;
 
     protected Vehicle(String model, int speed) {
         this.model = model;
@@ -30,16 +30,27 @@ public abstract class Vehicle implements Acceleration, Breakable {
     }
 
     private boolean isChanceBroken(int percent) {
-        double chanceBroken = 0.75;
+        double chanceBroken = 75;
         return percent >= chanceBroken;
     }
 
     public void move() {
         if (isBroken()) {
-            System.out.println("Поломка");
+            System.out.println("Поломка " + model);
             return;
         }
         this.cordX += speed;
+        System.out.println(model + " проехала " + cordX);
     }
 
+    public int getCordX() {
+        return cordX;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "model='" + model + '\'' +
+                '}';
+    }
 }

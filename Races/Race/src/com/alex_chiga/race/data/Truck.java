@@ -12,6 +12,6 @@ public class Truck extends Car implements Loading {
 
     @Override
     public void cargo() {
-        this.speed -= this.speed * PERCENT_CARGO;
+        this.speed -= (int) (this.speed * PERCENT_CARGO);
     }
 }
